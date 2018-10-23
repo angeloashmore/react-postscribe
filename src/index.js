@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import postscribe from 'postscribe'
 import omit from 'lodash.omit'
 import keys from 'lodash.keys'
 import pick from 'lodash.pick'
@@ -24,23 +23,25 @@ export class PostScribe extends React.Component {
   componentDidMount = () => {
     if (typeof window === 'undefined') return
 
-    postscribe(
-      this.el,
-      this.props.html,
-      pick(this.props, [
-        'afterAsync',
-        'afterDequeue',
-        'afterStreamStart',
-        'afterWrite',
-        'done',
-        'autoFix',
-        'beforeEnqueue',
-        'beforeWrite',
-        'beforeWriteToken',
-        'error',
-        'releaseAsync',
-      ]),
-    )
+    import('postscribe').then(postscribe => {
+      postscribe(
+        this.el,
+        this.props.html,
+        pick(this.props, [
+          'afterAsync',
+          'afterDequeue',
+          'afterStreamStart',
+          'afterWrite',
+          'done',
+          'autoFix',
+          'beforeEnqueue',
+          'beforeWrite',
+          'beforeWriteToken',
+          'error',
+          'releaseAsync',
+        ]),
+      )
+    })
   }
 
   shouldComponentUpdate = () => false
