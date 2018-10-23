@@ -21,7 +21,9 @@ export class PostScribe extends React.Component {
     releaseAsync: PropTypes.bool,
   }
 
-  componentDidMount = () =>
+  componentDidMount = () => {
+    if (typeof window === 'undefined') return
+
     postscribe(
       this.el,
       this.props.html,
@@ -39,6 +41,7 @@ export class PostScribe extends React.Component {
         'releaseAsync',
       ]),
     )
+  }
 
   shouldComponentUpdate = () => false
 
