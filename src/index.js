@@ -24,7 +24,7 @@ export class PostScribe extends React.Component {
     if (typeof window === 'undefined') return
 
     import('postscribe').then(postscribe => {
-      postscribe(
+      postscribe.default(
         this.el,
         this.props.html,
         pick(this.props, [
